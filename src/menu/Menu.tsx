@@ -1,0 +1,51 @@
+import { createUseStyles } from 'react-jss';
+import type { ThemeProps } from '../WebUnifiTheme.tsx';
+import SearchInput from './search/SearchInput.tsx';
+import Count from '../components/Count.tsx';
+import ListView from '../assets/icons/ListView.tsx';
+import GridView from '../assets/icons/GridView.tsx';
+import Filter from './filter/Filter.tsx';
+
+const useStyles = createUseStyles((theme: ThemeProps) => ({
+  menuContainer: {
+    gridArea: 'menu',
+    display: 'flex',
+    maxWidth: '95vw',
+    maxHeight: '34px',
+    margin: 0,
+    padding: '20px 40px 20px 40px',
+    backgroundColor: theme.color.natural,
+    justifyContent: 'space-between',
+    alignContent: 'center'
+  },
+  leftContainer: {
+    display: 'flex',
+    maxWidth: '40%'
+  },
+  rightContainer: {
+    display: 'flex',
+    maxWidth: 'min-content'
+  },
+  iconPlacement: {
+    alignSelf: 'center'
+  }
+}));
+const Menu = () => {
+  const styles = useStyles();
+
+  return (
+    <div className={styles.menuContainer}>
+      <div className={styles.leftContainer} style={{ width: '60%' }}>
+        <SearchInput />
+        <Count total={123} />
+      </div>
+      <div className={styles.rightContainer}>
+        <ListView className={styles.iconPlacement} />
+        <GridView className={styles.iconPlacement} />
+        <Filter />
+      </div>
+    </div>
+  );
+};
+
+export default Menu;
