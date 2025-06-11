@@ -2,13 +2,15 @@ import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from './WebUnifiTheme.tsx';
 import Header from './header/Header.tsx';
 import Menu from './menu/Menu.tsx';
+import Main from './main/Main.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   layout: {
     display: 'grid',
     overflow: 'hidden',
-    gridTemplateColumns: 'minmax(max-content, 220px) auto',
-    gridTemplateRows: 'min-content calc(100vh - 80px)',
+    gridTemplateColumns: '100vw',
+    gridTemplateRows: '52px 56px calc(100vh - 108px)',
+    // The directory tree follows the layout structure bellow
     gridTemplateAreas: `
       "header"
       "menu"
@@ -20,11 +22,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     fontStyle: 'normal',
     color: theme.color.text2,
     scrollbarColor: `${theme.color.neutral02} ${theme.color.natural}`
-  },
-  main: {
-    gridArea: 'main',
-    width: '100vw',
-    height: 'calc(100vh - 144px)'
   }
 }));
 
@@ -35,6 +32,7 @@ function App() {
     <div className={styles.layout}>
       <Header />
       <Menu />
+      <Main />
     </div>
   );
 }

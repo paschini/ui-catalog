@@ -22,7 +22,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
   },
   author: {
     paddingRight: '50px',
-    width: '20rem',
+    width: '100%',
     height: '100%',
     alignContent: 'center',
     textAlign: 'right',
@@ -32,6 +32,8 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 
 const Header = () => {
   const styles = useStyles();
+  // TODO: fix logo border / appearance
+  // TODO: clicking U logo should reset the state / go Home
 
   return (
     <div className={styles.headerContainer}>
