@@ -15,8 +15,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     margin: 0,
     padding: '20px 40px 20px 40px',
     backgroundColor: theme.color.natural,
-    justifyContent: 'space-between',
-    alignContent: 'center'
+    justifyContent: 'space-between'
   },
   leftContainer: {
     display: 'flex',
@@ -24,7 +23,8 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
   },
   rightContainer: {
     display: 'flex',
-    maxWidth: 'min-content'
+    maxWidth: 'min-content',
+    alignSelf: 'center'
   },
   iconPlacement: {
     alignSelf: 'center'

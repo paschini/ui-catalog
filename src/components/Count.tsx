@@ -3,8 +3,8 @@ import type { ThemeProps } from '../WebUnifiTheme.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   text: {
+    padding: '10px',
     minWidth: '5rem',
-    alignSelf: 'center',
     color: theme.color.gray4
   }
 }));

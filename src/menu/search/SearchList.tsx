@@ -4,7 +4,9 @@ import type { ThemeProps } from '../../WebUnifiTheme.tsx';
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   listContainer: {
     display: 'flex',
-    width: '88%',
+    width: '93%',
+    position: 'relative',
+    top: '-20px',
     backgroundColor: theme.color.natural,
     justifyContent: 'start',
     alignContent: 'center',
@@ -12,7 +14,8 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     borderRadius: theme.sizes.borderRadius,
     boxShadow: theme.boxShadow,
     lineHeight: theme.sizes.lineHeight,
-    padding: theme.sizes.paddings.small
+    padding: theme.sizes.paddings.small,
+    zIndex: 1000
   },
   listItem: {
     display: 'flex',

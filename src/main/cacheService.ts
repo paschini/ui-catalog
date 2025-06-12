@@ -5,28 +5,60 @@ export class CacheService {
     this.cacheName = cacheName;
   }
 
-  async getData(url: string) {
+  private getMaxAge(headers: Headers): number {
+    const cacheControl = headers.get('cache-control');
+    console.log('cacheControl ? ', cacheControl);
+    if (!cacheControl) return 0;
+
+    const maxAgeMatch = cacheControl.match(/max-age=(\d+)/);
+    return maxAgeMatch ? parseInt(maxAgeMatch[1], 10) : 0;
+  }
+
+  getData = async (url: string) => {
+    console.log('🔍 Fetching data from cache');
     try {
       const cache = await caches.open(this.cacheName);
       const cachedResponse = await cache.match(url);
 
       if (cachedResponse) {
-        return await cachedResponse.json();
+        console.log('Data found in cache ✅');
+        const cachedData = await cachedResponse.json();
+        const metadata = {
+          lastModified: cachedResponse.headers.get('last-modified') || '',
+          cacheDate: cachedResponse.headers.get('date') || '',
+          maxAge: this.getMaxAge(cachedResponse.headers)
+        };
+        return (cachedData && { cachedData, metadata }) || null;
       }
       return null;
     } catch (error) {
-      console.error('Cache läsningsfel:', error);
+      console.error('Could not read from cache', error);
       return null;
     }
-  }
+  };
 
-  async cacheData(url: string, data: any) {
+  async cacheData(url: string, data: any, originalHeaders: Headers) {
+    console.log('do i get here?');
     try {
       const cache = await caches.open(this.cacheName);
-      const response = new Response(JSON.stringify(data));
+      const headers = new Headers({
+        date: new Date().toUTCString(),
+        'cache-control': originalHeaders.get('cache-control') || '',
+        'last-modified': originalHeaders.get('last-modified') || ''
+      });
+
+      const newMetadata = {
+        lastModified: headers.get('last-modified') || '',
+        cacheDate: new Date().toUTCString(),
+        maxAge: this.getMaxAge(headers)
+      };
+
+      const response = new Response(JSON.stringify(data), { headers });
       await cache.put(url, response);
+
+      return newMetadata;
     } catch (error) {
-      console.error('Cache skrivningsfel:', error);
+      console.error('Could not write to cache:', error);
     }
   }
 }

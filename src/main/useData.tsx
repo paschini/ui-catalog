@@ -3,75 +3,50 @@ import { CacheService } from './cacheService';
 
 const cacheService = new CacheService('ui-data-cache');
 
-export const useData = (url: string, shouldFetch: boolean) => {
-  const [data, setData] = useState<any>(null);
+export const useData = (url: string) => {
+  const [data, setData] = useState<any>();
+  const [metadata, setMetaData] = useState<any>();
   const [dataIsLoading, setDataIsLoading] = useState(false);
   const [dataError, setDataError] = useState<Error | null>(null);
 
   useEffect(() => {
+    console.log('🔍 Fetching data');
     const fetchData = async () => {
       try {
         setDataIsLoading(true);
 
-        // Kolla först i cache om vi inte behöver hämta ny data
-        if (!shouldFetch) {
-          const cachedData = await cacheService.getData(url);
-          if (cachedData) {
-            setData(cachedData);
-            setDataIsLoading(false);
-            return;
-          }
+        const { cachedData, metadata } = await cacheService.getData(url);
+        if (cachedData) {
+          setData(cachedData);
+          setMetaData(metadata);
+
+          console.log('Using cached data.');
+          setDataIsLoading(false);
+          return;
         }
 
-        // Hämta ny data om det behövs
         const response = await fetch(url);
-        const jsonData = await response.json();
 
-        // Spara i cache
-        await cacheService.cacheData(url, jsonData);
-        setData(jsonData);
+        console.log('🔍 Original response headers:', {
+          lastModified: response.headers.get('last-modified'),
+          allHeaders: JSON.stringify(Object.fromEntries(response.headers.entries()))
+        });
+
+        const newData = await response.json();
+
+        const newMetadata = await cacheService.cacheData(url, newData, response.headers);
+        console.log('Caching new data ✨');
+        setData(newData);
+        setMetaData(newMetadata);
       } catch (error) {
-        setDataError(error instanceof Error ? error : new Error('Ett fel uppstod'));
+        setDataError(error instanceof Error ? error : new Error('Something went wrong while fetching data.'));
       } finally {
         setDataIsLoading(false);
       }
     };
 
     fetchData();
-  }, [url, shouldFetch]);
+  }, [url]);
 
-  return { data, dataIsLoading, dataError };
+  return { data, dataIsLoading, dataError, metadata };
 };
-
-// import { useState, useEffect } from 'react';
-//
-// export const useData = (url: string, shouldFetch: boolean) => {
-//   const [data, setData] = useState(null);
-//   const [dataIsLoading, setDataIsLoading] = useState(true);
-//   const [dataError, setDataError] = useState<Error | null>(null);
-//
-//   useEffect(() => {
-//     if (shouldFetch) {
-//       const fetchData = async () => {
-//         try {
-//           setDataIsLoading(true);
-//           const response: Response = await fetch(url, { method: 'GET' });
-//           console.log(response);
-//           const raw = response.json;
-//
-//           console.log(raw);
-//
-//           setData(raw);
-//         } catch (error) {
-//           setDataError(error instanceof Error ? error : new Error('Something went wrong while fetching data.'));
-//         } finally {
-//           setDataIsLoading(false);
-//         }
-//       };
-//
-//       fetchData();
-//     }
-//   }, [url]);
-//
-//   return { data, dataIsLoading, dataError };
-// };

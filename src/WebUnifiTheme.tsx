@@ -51,5 +51,5 @@ export const theme: ThemeProps = {
       large: '30px'
     }
   },
-  boxShadow: `0 20px 20px 20px ${WebUnifiColors.neutral02}`
+  boxShadow: `0 40px 40px 10px ${WebUnifiColors.neutral02}`
 };

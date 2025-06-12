@@ -1,6 +1,7 @@
 import SearchList from './SearchList.tsx';
 import Input from '../../components/Input.tsx';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
+import { useClickOutside } from '../../components/useClickOutside.ts';
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -17,20 +18,7 @@ const SearchInput = () => {
     setIsShowingList(event.currentTarget.value.length > 0);
   };
 
-  const handleClickOutside = (e: MouseEvent) => {
-    console.log(e.target);
-    if (ref.current && !ref.current.contains(e.target as Node)) {
-      setIsShowingList(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside, true);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside, true);
-    };
-  }, []);
+  useClickOutside(ref, () => setIsShowingList(false));
 
   return (
     <div ref={ref}>

@@ -18,7 +18,6 @@ export const useHeaders = (url: string) => {
   const [headers, setHeaders] = useState<Headers | null>(null);
   const [headerIsLoading, setHeaderIsLoading] = useState(true);
   const [headerError, setHeaderError] = useState<Error | null>(null);
-  const [needsFetch, setNeedsFetch] = useState(false);
 
   useEffect(() => {
     const fetchHeaders = async () => {
@@ -47,7 +46,6 @@ export const useHeaders = (url: string) => {
 
         const lastModified = new Date(formattedHeaders.lastModified || '');
         if (lastModified > localLastModified) {
-          setNeedsFetch(true);
           localStorage.setItem('UIdataHeader', JSON.stringify(formattedHeaders));
         }
       } catch (error) {
@@ -60,5 +58,5 @@ export const useHeaders = (url: string) => {
     fetchHeaders();
   }, [url]);
 
-  return { headers, headerIsLoading, headerError, needsFetch };
+  return { headers, headerIsLoading, headerError };
 };

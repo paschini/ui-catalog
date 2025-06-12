@@ -1,38 +1,82 @@
+import { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import { useHeaders } from './useHeaders.tsx';
 import { useData } from './useData.tsx';
+import { WebUnifiColors } from '../WebUnifiColors.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
     gridArea: 'main',
+    display: 'flex',
+    flexDirection: 'column',
     width: '100vw',
-    height: '100%',
-    padding: '0 40px 0 40px',
     backgroundColor: theme.color.natural
+  },
+  contentArea: {
+    display: 'flex',
+    width: '100%',
+    height: '96%',
+    margin: '20px 0 0 0',
+    alignContent: 'center',
+    justifyContent: 'staart',
+    padding: '0 40px 0 40px'
+  },
+  notificationArea: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    display: 'flex',
+    flexDirection: 'row',
+    // columnGap: '20px',
+    justifyContent: 'space-between',
+    width: '100%',
+    height: 'min-content',
+    alignSelf: 'flex-end',
+    boxShadow: `0 -20px 20px 20px ${WebUnifiColors.neutral02}`,
+    backgroundColor: theme.color.natural,
+    zIndex: 10000000
+  },
+  dataInfo: {
+    width: 'max-content',
+    margin: '20px 40px',
+    alignSelf: 'end',
+    justifyContent: 'left'
+  },
+  errors: {
+    width: 'max-content',
+    alignSelf: 'center',
+    justifyContent: 'right',
+    margin: '20px 40px'
   }
 }));
 
 const Main = () => {
   const styles = useStyles();
   const endpoint = 'https://static.ui.com/fingerprint/ui/public.json';
-
-  const { headers, headerIsLoading, headerError, needsFetch } = useHeaders(endpoint);
-  const { data, dataIsLoading, dataError } = useData(endpoint, true); //TODO unforce
+  const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
+  const [isShowingNotification, setIsShowingNotification] = useState(true);
+  const [activeView, setActiveView] = useState<'list' | 'grid' | 'details'>('list');
 
   return (
     <div className={styles.main}>
-      <h1>Main Page! </h1>
-      <h2>Header:</h2>
+      {isShowingNotification && (
+        <div className={styles.notificationArea}>
+          <div className={styles.dataInfo}>
+            {data && (
+              <div>
+                <div>{`Data version: ${data.version}`}</div>
+                <div>{`Date modified: ${metadata.lastModified}`}</div>
+              </div>
+            )}
+          </div>
 
-      {/*{headerIsLoading && <p>Loading headers...</p>}*/}
-      {/*{headerError && <p>Error: {headerError.message}</p>}*/}
-      {/*{headers && <div>{headers.cacheControl && <p>Cache-Control: {headers.cacheControl}</p>}</div>}*/}
-
-      {needsFetch && dataIsLoading && <p>Loading...</p>}
-      {dataError && <p>Data error: {dataError.message}</p>}
-      {headers && <div>{headers.cacheControl && <p>Cache-Control: {headers.cacheControl}</p>}</div>}
-      {data && <div>/* Rendera din data här */</div>}
+          <div className={styles.errors}>{dataError && <p>Data error: {dataError.message}</p>}</div>
+        </div>
+      )}
+      <div className={styles.contentArea}>
+        {dataIsLoading && <p>Loading...</p>}
+        <div>Im the middle container</div>
+      </div>
     </div>
   );
 };
