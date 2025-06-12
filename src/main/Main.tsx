@@ -3,6 +3,9 @@ import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
 import { useData } from './useData.tsx';
 import { WebUnifiColors } from '../WebUnifiColors.tsx';
+import DataVersion from './notifications/DataVersion.tsx';
+import Errors from './notifications/Errors.tsx';
+import DeviceList from './DeviceList.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -27,7 +30,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     left: 0,
     display: 'flex',
     flexDirection: 'row',
-    // columnGap: '20px',
     justifyContent: 'space-between',
     width: '100%',
     height: 'min-content',
@@ -35,18 +37,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     boxShadow: `0 -20px 20px 20px ${WebUnifiColors.neutral02}`,
     backgroundColor: theme.color.natural,
     zIndex: 10000000
-  },
-  dataInfo: {
-    width: 'max-content',
-    margin: '20px 40px',
-    alignSelf: 'end',
-    justifyContent: 'left'
-  },
-  errors: {
-    width: 'max-content',
-    alignSelf: 'center',
-    justifyContent: 'right',
-    margin: '20px 40px'
   }
 }));
 
@@ -57,25 +47,19 @@ const Main = () => {
   const [isShowingNotification, setIsShowingNotification] = useState(true);
   const [activeView, setActiveView] = useState<'list' | 'grid' | 'details'>('list');
 
+  data && console.log(data.devices);
+
   return (
     <div className={styles.main}>
       {isShowingNotification && (
         <div className={styles.notificationArea}>
-          <div className={styles.dataInfo}>
-            {data && (
-              <div>
-                <div>{`Data version: ${data.version}`}</div>
-                <div>{`Date modified: ${metadata.lastModified}`}</div>
-              </div>
-            )}
-          </div>
-
-          <div className={styles.errors}>{dataError && <p>Data error: {dataError.message}</p>}</div>
+          <DataVersion version={data?.version} lastModified={metadata?.lastModified} />
+          <Errors errors={[]} />
         </div>
       )}
       <div className={styles.contentArea}>
         {dataIsLoading && <p>Loading...</p>}
-        <div>Im the middle container</div>
+        {data && <DeviceList devices={data?.devices} />}
       </div>
     </div>
   );
