@@ -6,17 +6,17 @@ type MockCache = {
   put: jest.Mock;
 };
 
+type MockCaches = {
+  open: jest.Mock;
+};
+
 const mockCache: MockCache = {
   match: jest.fn(),
   put: jest.fn()
 };
 
-type MockCaches = {
-  open: jest.Mock;
-};
-
 const mockCaches: MockCaches = {
-  open: jest.fn().mockResolvedValue(mockCache)
+  open: jest.fn().mockResolvedValue(mockCache as never)
 };
 
 const originalGlobal = global;
@@ -52,11 +52,11 @@ describe('CacheService', () => {
       });
 
       const mockResponse = {
-        json: jest.fn().mockResolvedValue(cachedData),
+        json: jest.fn().mockResolvedValue(cachedData as never),
         headers
       };
 
-      mockCache.match.mockResolvedValueOnce(mockResponse);
+      mockCache.match.mockResolvedValueOnce(mockResponse as never);
 
       const result = await cacheService.getData(url);
       expect(mockCaches.open).toHaveBeenCalledWith('test-cache');
@@ -74,7 +74,7 @@ describe('CacheService', () => {
     test('should return null data when cache does not exist', async () => {
       const url = 'https://example.com/api/data';
 
-      mockCache.match.mockResolvedValue(null);
+      mockCache.match.mockResolvedValue(null as never);
 
       const result = await cacheService.getData(url);
       expect(mockCaches.open).toHaveBeenCalledWith('test-cache');
@@ -85,7 +85,7 @@ describe('CacheService', () => {
     test('should handle errors and return null', async () => {
       const url = 'https://example.com/api/data';
 
-      mockCache.match.mockRejectedValue(new Error('Cache error'));
+      mockCache.match.mockRejectedValue(new Error('Cache error') as never);
 
       const result = await cacheService.getData(url);
       expect(mockCaches.open).toHaveBeenCalledWith('test-cache');
