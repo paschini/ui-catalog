@@ -23,6 +23,7 @@ export const iconStyles = createUseStyles((theme: ThemeProps) => ({
     backgroundColor: 'transparent',
     outline: 'none',
     fill: theme.color.neutral08,
+    cursor: 'pointer',
     '&:hover': {
       backgroundColor: theme.color.neutral02,
       border: `1px solid ${theme.color.neutral02}`
@@ -36,5 +37,10 @@ export const iconStyles = createUseStyles((theme: ThemeProps) => ({
       border: `1px solid ${theme.color.neutral01}`,
       fill: theme.color.ublue06
     }
+  },
+  active: {
+    backgroundColor: theme.color.neutral01,
+    border: `1px solid ${theme.color.neutral01}`,
+    fill: theme.color.ublue06
   }
 }));

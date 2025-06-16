@@ -4,9 +4,9 @@ import { createUseStyles } from 'react-jss';
 
 export const useStyles = createUseStyles((theme: ThemeProps) => ({
   icon: {
-    width: '52px',
-    height: '52px',
-    padding: '0 30px 5px 0',
+    width: '80px', // TODO: check in safari and chrome
+    height: '50px', // These values are good in edge, probably broken in safari now
+    // padding: '0 5px 5px 0',
     boxSizing: 'border-box',
     border: '1px solid transparent',
     backgroundColor: 'transparent',

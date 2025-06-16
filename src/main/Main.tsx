@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
 import { useData } from './useData.tsx';
@@ -6,6 +6,9 @@ import { WebUnifiColors } from '../WebUnifiColors.tsx';
 import DataVersion from './notifications/DataVersion.tsx';
 import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
+import { globalReducer } from '../globalReducer.tsx';
+import { initialValue } from '../globalContext.tsx';
+import DeviceGrid from './DeviceGrid.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -42,30 +45,40 @@ const Main = () => {
   const styles = useStyles();
   const endpoint = 'https://static.ui.com/fingerprint/ui/public.json';
   const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
-  const [isShowingNotification, setIsShowingNotification] = useState(true);
-  const [activeView, setActiveView] = useState<'list' | 'grid' | 'details'>('list');
+  const [isShowingNotification, setIsShowingNotification] = useState(false);
 
-  // TODO: activeView and errors need to be a global context
-  // TODO: product icons are probably images that can be extracted from the magic image url
-  // Image urls can be built using
-  // https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${id}%2Fdefault%2F${images.default}.png&w=${size}&q=75
-
-  // For an example see
-  // https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2Fed67d43e-2d5c-4928-ace8-edf984baeff1%2Fdefault%2F977c1f8c477549aeb7238727fd4ecc62.png&w=640&q=75
+  const [{ activeView }] = useReducer(globalReducer, initialValue);
 
   data && console.log(data.devices);
+
+  const getView = () => {
+    switch (activeView) {
+      case 'list':
+        return <DeviceList devices={data?.devices} />;
+      case 'grid':
+        return <DeviceGrid devices={data?.devices} />;
+
+      default:
+        return <DeviceList devices={data?.devices} />;
+    }
+  };
+
+  useEffect(() => {
+    console.log('changed');
+  }, [activeView]);
 
   return (
     <div className={styles.main}>
       {isShowingNotification && (
         <div className={styles.notificationArea}>
           <DataVersion version={data?.version} lastModified={metadata?.lastModified} />
-          <Errors errors={[]} />
+          <Errors />
         </div>
       )}
       <div className={styles.contentArea}>
         {dataIsLoading && <p>Loading...</p>}
-        {data && <DeviceList devices={data?.devices} />}
+
+        {data && getView()}
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ const cacheService = new CacheService('ui-data-cache');
 
 export const useData = (url: string) => {
   const [data, setData] = useState<any>();
-  const [metadata, setMetaData] = useState<any>();
+  const [metadata, setMetadata] = useState<any>();
   const [dataIsLoading, setDataIsLoading] = useState(false);
   const [dataError, setDataError] = useState<Error | null>(null);
 
@@ -15,16 +15,19 @@ export const useData = (url: string) => {
       try {
         setDataIsLoading(true);
 
+        console.log('before data');
         const { cachedData, metadata } = await cacheService.getData(url);
+
         if (cachedData) {
           setData(cachedData);
-          setMetaData(metadata);
+          setMetadata(metadata);
 
           console.log('Using cached data.');
           setDataIsLoading(false);
           return;
         }
 
+        console.log('should make it here');
         const response = await fetch(url);
 
         console.log('🔍 Original response headers:', {
@@ -37,7 +40,7 @@ export const useData = (url: string) => {
         const newMetadata = await cacheService.cacheData(url, newData, response.headers);
         console.log('Caching new data ✨');
         setData(newData);
-        setMetaData(newMetadata);
+        setMetadata(newMetadata);
       } catch (error) {
         setDataError(error instanceof Error ? error : new Error('Something went wrong while fetching data.'));
       } finally {

@@ -17,6 +17,7 @@ export class CacheService {
   getData = async (url: string) => {
     console.log('🔍 Fetching data from cache');
     try {
+      console.log('in the try');
       const cache = await caches.open(this.cacheName);
       const cachedResponse = await cache.match(url);
 
@@ -30,7 +31,8 @@ export class CacheService {
         };
         return (cachedData && { cachedData, metadata }) || null;
       }
-      return null;
+      console.log('no cache found, returning <null>');
+      return { cachedData: null, metadata: null };
     } catch (error) {
       console.error('Could not read from cache', error);
       return null;

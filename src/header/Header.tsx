@@ -18,7 +18,8 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     width: '60rem',
     height: '100%',
     alignContent: 'center',
-    padding: `0 ${theme.sizes.paddings.medium}`
+    // padding: `0 ${theme.sizes.paddings.small}`
+    padding: 0
   },
   author: {
     paddingRight: '50px',
@@ -38,7 +39,6 @@ const Header = () => {
   return (
     <div className={styles.headerContainer}>
       <UDefault />
-      {/* TODO: add breadcrumb text to context */}
       <span className={styles.breadcrumbs}>Devices</span>
       <span className={styles.author}>Author/Camila Paschini</span>
     </div>

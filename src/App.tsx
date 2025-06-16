@@ -3,6 +3,7 @@ import type { ThemeProps } from './WebUnifiTheme.tsx';
 import Header from './header/Header.tsx';
 import Menu from './menu/Menu.tsx';
 import Main from './main/Main.tsx';
+import { GlobalContext, initialValue } from './globalContext.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   layout: {
@@ -29,11 +30,13 @@ function App() {
   const styles = useStyles();
 
   return (
-    <div className={styles.layout}>
-      <Header />
-      <Menu />
-      <Main />
-    </div>
+    <GlobalContext value={initialValue}>
+      <div className={styles.layout}>
+        <Header />
+        <Menu />
+        <Main />
+      </div>
+    </GlobalContext>
   );
 }
 

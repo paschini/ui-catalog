@@ -26,11 +26,11 @@ const useStyles = createUseStyles({
   }
 });
 
-type DeviceListProps = {
+type DeviceGridProps = {
   devices: DeviceData[];
 };
 
-const DeviceList = (props: DeviceListProps) => {
+const DeviceGrid = (props: DeviceGridProps) => {
   const styles = useStyles();
   const { devices } = props;
   const iconSizeSmall = 20;
@@ -41,7 +41,7 @@ const DeviceList = (props: DeviceListProps) => {
     <div className={styles.table}>
       <div className={styles.tableHeaders}>
         <div className={styles.tableRow}>
-          <span>&nbsp;</span>
+          <span>GRID</span>
           <span>Product Line</span>
           <span>Name</span>
         </div>
@@ -63,4 +63,4 @@ const DeviceList = (props: DeviceListProps) => {
   );
 };
 
-export default DeviceList;
+export default DeviceGrid;

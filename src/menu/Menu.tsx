@@ -5,6 +5,9 @@ import Count from '../components/Count.tsx';
 import ListView from '../assets/icons/ListView.tsx';
 import GridView from '../assets/icons/GridView.tsx';
 import Filter from './filter/Filter.tsx';
+import { useContext, useReducer } from 'react';
+import { GlobalContext, initialValue } from '../globalContext.tsx';
+import { globalReducer } from '../globalReducer.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   menuContainer: {
@@ -32,6 +35,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 }));
 const Menu = () => {
   const styles = useStyles();
+  const [globalState, globalDispatch] = useReducer(globalReducer, initialValue);
 
   return (
     <div className={styles.menuContainer}>

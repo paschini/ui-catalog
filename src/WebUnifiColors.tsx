@@ -29,7 +29,7 @@ export const WebUnifiColors = {
   neutral08: '#838691',
   red: '#F03A3E',
   red3: '#F9B0B2',
-  text1Light: 'rgba(0, 0, 0, 0.85)',
+  text1Light: '#000000',
   text1: '#212327',
   text2: '#50565E',
   text3Light: 'rgba(0, 0, 0, 0.45)',

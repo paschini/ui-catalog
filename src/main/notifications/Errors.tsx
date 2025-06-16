@@ -1,5 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { ThemeProps } from '../../WebUnifiTheme.tsx';
+import { useContext } from 'react';
+import { GlobalContext } from '../../globalContext.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   errors: {
@@ -11,22 +13,21 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
   }
 }));
 
-type Error = {
+export type Error = {
   code?: number;
   message: string;
 };
 
-type ErrorsProps = {
-  errors: Error[];
-};
-
-const Errors = (props: ErrorsProps) => {
+const Errors = () => {
   const styles = useStyles();
-  const { errors } = props;
+  const { errors } = useContext(GlobalContext);
 
   return (
     <div className={styles.errors}>
-      {errors.map((error: Error) => error && <p>{`Error: -${error.code}- ${error.message}`}</p>)}
+      {errors.map(
+        (error: Error, index: number) =>
+          error && <p key={`error-${index}`}>{`Error: -${error.code}- ${error.message}`}</p>
+      )}
     </div>
   );
 };
