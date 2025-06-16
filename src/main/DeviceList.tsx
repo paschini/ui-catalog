@@ -1,6 +1,9 @@
-import { DeviceData } from './DeviceDataTypes.ts';
+import { Suspense } from 'react';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
+import { DeviceData } from './DeviceDataTypes.ts';
+import ImageLoader from './ImageLoader.tsx';
+import Img from '../assets/icons/Img.tsx';
 
 const useStyles = createUseStyles({
   table: {
@@ -14,7 +17,6 @@ const useStyles = createUseStyles({
   tableContent: {
     height: '100%',
     overflowY: 'scroll'
-    // boxShadow: `0 -20px 20px 20px ${WebUnifiColors.neutral02}`
   },
   tableRow: {
     display: 'grid',
@@ -28,14 +30,13 @@ const useStyles = createUseStyles({
 
 type DeviceListProps = {
   devices: DeviceData[];
+  onSelectDevice: (id: string) => void;
 };
 
 const DeviceList = (props: DeviceListProps) => {
   const styles = useStyles();
-  const { devices } = props;
-  const iconSizeSmall = 20;
-  // const iconSizeMedium = 32;
-  // const iconSizeBig = 64;
+  const { devices, onSelectDevice } = props;
+  const iconSize = 20;
 
   return (
     <div className={styles.table}>
@@ -49,11 +50,14 @@ const DeviceList = (props: DeviceListProps) => {
 
       <div className={styles.tableContent}>
         {devices.map((device) => (
-          <div className={styles.tableRow} key={`device-${device.id}`}>
-            <img
-              alt={`icon for ${device.product.name} ${device.line.name}`}
-              src={`https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${iconSizeSmall}&q=75`}
-            />
+          <div className={styles.tableRow} key={`device-${device.id}`} onClick={() => onSelectDevice(device.id)}>
+            <Suspense fallback={<Img width={'33'} height={'19'} />}>
+              <ImageLoader
+                src={`https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${iconSize}&q=75`}
+                alt={`icon for ${device.product.name} ${device.line.name}`}
+              />
+            </Suspense>
+
             <span>{device.line.name}</span>
             <span>{device.product.name}</span>
           </div>

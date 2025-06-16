@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GlobalContext } from '../globalContext.tsx';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
@@ -8,6 +8,8 @@ import DataVersion from './notifications/DataVersion.tsx';
 import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
 import DeviceGrid from './DeviceGrid.tsx';
+import DeviceDetails from './DeviceDetails.tsx';
+import { DeviceData } from './DeviceDataTypes.ts';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -46,6 +48,8 @@ const Main = () => {
   const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
   const [isShowingNotification, setIsShowingNotification] = useState(false);
 
+  const [selectedDeviceId, setSelectedDeviceId] = useState<string | null>(null);
+
   const {
     globalState: { activeView, errors },
     globalDispatch
@@ -54,12 +58,14 @@ const Main = () => {
   const getView = () => {
     switch (activeView) {
       case 'list':
-        return <DeviceList devices={data?.devices} />;
+        return <DeviceList devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
       case 'grid':
-        return <DeviceGrid devices={data?.devices} />;
+        return <DeviceGrid devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
+      case 'details':
+        return <DeviceDetails device={data?.devices.find((device: DeviceData) => device.id === selectedDeviceId)} />;
 
       default:
-        return <DeviceList devices={data?.devices} />;
+        return <DeviceList devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
     }
   };
 
@@ -70,6 +76,14 @@ const Main = () => {
   if (errors.length > 0) {
     setIsShowingNotification(true);
   }
+
+  useEffect(() => {
+    if (data && selectedDeviceId) {
+      globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
+    }
+  }, [data, globalDispatch, selectedDeviceId]);
+
+  console.log(data);
 
   return (
     <div className={styles.main}>

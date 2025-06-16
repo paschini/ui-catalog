@@ -16,7 +16,7 @@ const ListView = (props: IconProps) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <mask id="path-1-inside-1_2_850" fill={`${backgroundFill}`}>
+      <mask id="path-1-inside-1_2_850" fill={backgroundFill}>
         <path
           fillRule="evenodd"
           clipRule="evenodd"

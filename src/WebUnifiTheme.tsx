@@ -18,6 +18,9 @@ export type WebUnifiSizes = {
     medium: string;
     large: string;
   };
+  font: {
+    xlarge1: string;
+  };
 };
 
 export type ThemeProps = {
@@ -49,6 +52,9 @@ export const theme: ThemeProps = {
       small: '10px',
       medium: '20px',
       large: '30px'
+    },
+    font: {
+      xlarge1: '20px'
     }
   },
   boxShadow: `0 40px 40px 10px ${WebUnifiColors.neutral02}`

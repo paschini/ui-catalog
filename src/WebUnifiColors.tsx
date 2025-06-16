@@ -14,6 +14,7 @@ export type ColorProps = {
   text1Light: string;
   text1: string;
   text2: string;
+  text3: string;
   text3Light: string;
   ublue06: string;
 };
@@ -29,9 +30,10 @@ export const WebUnifiColors = {
   neutral08: '#838691',
   red: '#F03A3E',
   red3: '#F9B0B2',
-  text1Light: '#000000',
+  text1Light: 'rgba(0, 0, 0, 0.85)',
   text1: '#212327',
   text2: '#50565E',
+  text3: 'rgba(0, 0, 0, 0.45)',
   text3Light: 'rgba(0, 0, 0, 0.45)',
   ublue06: '#006FFF'
 };

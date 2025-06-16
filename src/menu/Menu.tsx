@@ -39,7 +39,9 @@ const Menu = () => {
     globalDispatch
   } = useContext(GlobalContext);
 
-  return (
+  return activeView === 'details' ? (
+    <div>details menu goes here</div>
+  ) : (
     <div className={styles.menuContainer}>
       <div className={styles.leftContainer} style={{ width: '60%' }}>
         <SearchInput />
