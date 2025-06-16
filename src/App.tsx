@@ -13,7 +13,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     overflow: 'hidden',
     gridTemplateColumns: '100vw',
     gridTemplateRows: '52px 56px calc(100vh - 108px)',
-    // The directory tree follows the layout structure bellow
     gridTemplateAreas: `
       "header"
       "menu"

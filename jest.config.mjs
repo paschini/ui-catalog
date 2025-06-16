@@ -1,13 +1,15 @@
 const config = {
   testEnvironment: 'node',
-  transform: {},
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest'
+  },
   transformIgnorePatterns: ['/node_modules/'],
   modulePaths: ['<rootDir>/src/'],
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.{js,ts}'],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageThreshold: {
@@ -19,7 +21,7 @@ const config = {
     }
   },
   verbose: true,
-  testMatch: ['**/__tests__/**/*.js', '**/?(*.)+(spec|test).js']
+  testMatch: ['**/__tests__/**/*.{js,ts}', '**/?(*.)+(spec|test).{js,ts}']
 };
 
 export default config;

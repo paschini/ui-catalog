@@ -1,6 +1,7 @@
-import { createContext, Dispatch } from 'react';
-import { Error } from './main/notifications/Errors.tsx';
-import { GlobalActions } from './globalReducer.tsx';
+import { createContext } from 'react';
+import type { Dispatch } from 'react';
+import type { Error } from './main/notifications/Errors.tsx';
+import type { GlobalActions } from './globalReducer.tsx';
 
 export type ActiveView = 'list' | 'grid' | 'details';
 

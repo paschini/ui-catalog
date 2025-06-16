@@ -18,7 +18,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     width: '60rem',
     height: '100%',
     alignContent: 'center',
-    // padding: `0 ${theme.sizes.paddings.small}`
     padding: 0
   },
   author: {
@@ -33,8 +32,6 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 
 const Header = () => {
   const styles = useStyles();
-  // TODO: fix logo border / appearance
-  // TODO: clicking U logo should reset the state / go Home
 
   return (
     <div className={styles.headerContainer}>

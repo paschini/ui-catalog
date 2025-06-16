@@ -45,8 +45,8 @@ export type Product = {
 };
 
 export type UISP = {
-  bleServices: any; //depends on the btle field values, might be able to do some typescript voodoo
-  /*
+  bleServices: any; // REF depends on the btle field values, might be able to do some typescript voodoo
+  /* TODO
    * bleServices: {
    *  [${btle.factoryDefault}]: { mode: 'factory' | 'default' }
    *  [${btle.userConfigured}]:: { mode: 'factory' | 'default' }
@@ -82,7 +82,7 @@ export type Network = {
   deviceCapabilities: string[];
   ethernetMaxSpeedMegabitsPerSecond: number;
   diagram?: string[];
-  linkNegotiation?: any; // check later
+  linkNegotiation?: any;
   features?: Features;
   minimumFirmwareRequired: string;
   model: string;
@@ -125,5 +125,5 @@ export type DeviceData = {
   tripplets: Tripplets;
   uisp?: UISP;
   unifi?: UniFi;
-  videos: any; //TODO: check later
+  videos: any;
 };

@@ -1,5 +1,3 @@
-// Colors named after the design style guide
-
 export type ColorProps = {
   black45: string;
   gray4: string;
