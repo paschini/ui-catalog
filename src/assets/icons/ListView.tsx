@@ -3,14 +3,7 @@ import { theme } from '../../WebUnifiTheme.tsx';
 
 const ListView = (props: IconProps) => {
   const styles = iconStyles();
-  const {
-    backgroundFill = theme.color.natural,
-    width = theme.sizes.icon.small,
-    height = theme.sizes.icon.small,
-    className,
-    isActive,
-    onClick
-  } = props;
+  const { backgroundFill = theme.color.natural, className, isActive, onClick } = props;
 
   return (
     <svg
@@ -20,9 +13,6 @@ const ListView = (props: IconProps) => {
           ? `${styles.icon} ${className} ${isActive && styles.active}`
           : `${styles.icon} ${isActive && styles.active}`
       }
-      width={`${width}`}
-      height={`${height}`}
-      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

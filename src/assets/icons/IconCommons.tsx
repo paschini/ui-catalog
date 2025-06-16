@@ -3,8 +3,6 @@ import type { ThemeProps } from '../../WebUnifiTheme.tsx';
 
 export type IconProps = {
   name?: string;
-  width?: string;
-  height?: string;
   fill?: string;
   backgroundFill?: string;
   stroke?: string;
