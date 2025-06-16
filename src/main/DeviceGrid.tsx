@@ -1,4 +1,4 @@
-import { DeviceData } from './DeviceDataTypes.ts';
+import type { DeviceData } from './DeviceDataTypes.ts';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
 import ImageLoader from './ImageLoader.tsx';

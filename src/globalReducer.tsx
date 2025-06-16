@@ -1,5 +1,5 @@
-import { ActiveView, GlobalStateType } from './globalContext.tsx';
-import { Error } from './main/notifications/Errors.tsx';
+import type { ActiveView, GlobalStateType } from './globalContext.tsx';
+import type { Error } from './main/notifications/Errors.tsx';
 
 export type GlobalActions = { type: 'SET_ACTIVE_VIEW'; payload: ActiveView } | { type: 'SET_ERROR'; payload: Error };
 
@@ -12,6 +12,11 @@ export const globalReducer = (state: GlobalStateType, action: GlobalActions): Gl
       };
     }
     case 'SET_ERROR': {
+      const errorExists = state.errors.some((error) => error.message === action.payload.message);
+      if (errorExists) {
+        return state;
+      }
+
       return { ...state, errors: [...state.errors, action.payload] };
     }
     default: {

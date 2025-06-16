@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
-import { DeviceData } from './DeviceDataTypes.ts';
+import type { DeviceData } from './DeviceDataTypes.ts';
 import ImageLoader from './ImageLoader.tsx';
 import Img from '../assets/icons/Img.tsx';
 
