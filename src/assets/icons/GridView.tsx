@@ -1,19 +1,13 @@
 import { IconProps, iconStyles } from './IconCommons.tsx';
 import { theme } from '../../WebUnifiTheme.tsx';
-import { useReducer } from 'react';
-import { globalReducer } from '../../globalReducer.tsx';
-import { initialValue } from '../../globalContext.tsx';
 
 const GridView = (props: IconProps) => {
   const styles = iconStyles();
-  const { width = theme.sizes.icon.small, height = theme.sizes.icon.small, className } = props;
-
-  const [globalState, globalDispatch] = useReducer(globalReducer, initialValue);
-  const isActive = globalState.activeView === 'grid';
+  const { width = theme.sizes.icon.small, height = theme.sizes.icon.small, className, isActive, onClick } = props;
 
   return (
     <svg
-      onClick={() => globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'grid' })}
+      onClick={onClick}
       className={
         className
           ? `${styles.icon} ${className} ${isActive && styles.active}`

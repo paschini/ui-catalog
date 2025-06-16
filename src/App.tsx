@@ -4,6 +4,8 @@ import Header from './header/Header.tsx';
 import Menu from './menu/Menu.tsx';
 import Main from './main/Main.tsx';
 import { GlobalContext, initialValue } from './globalContext.tsx';
+import { useReducer } from 'react';
+import { globalReducer } from './globalReducer.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   layout: {
@@ -28,9 +30,10 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 
 function App() {
   const styles = useStyles();
+  const [globalState, globalDispatch] = useReducer(globalReducer, initialValue.globalState);
 
   return (
-    <GlobalContext value={initialValue}>
+    <GlobalContext value={{ globalState, globalDispatch }}>
       <div className={styles.layout}>
         <Header />
         <Menu />

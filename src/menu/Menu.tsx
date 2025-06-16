@@ -5,9 +5,8 @@ import Count from '../components/Count.tsx';
 import ListView from '../assets/icons/ListView.tsx';
 import GridView from '../assets/icons/GridView.tsx';
 import Filter from './filter/Filter.tsx';
-import { useContext, useReducer } from 'react';
-import { GlobalContext, initialValue } from '../globalContext.tsx';
-import { globalReducer } from '../globalReducer.tsx';
+import { useContext } from 'react';
+import { GlobalContext } from '../globalContext.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   menuContainer: {
@@ -35,7 +34,10 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 }));
 const Menu = () => {
   const styles = useStyles();
-  const [globalState, globalDispatch] = useReducer(globalReducer, initialValue);
+  const {
+    globalState: { activeView },
+    globalDispatch
+  } = useContext(GlobalContext);
 
   return (
     <div className={styles.menuContainer}>
@@ -44,8 +46,16 @@ const Menu = () => {
         <Count total={123} />
       </div>
       <div className={styles.rightContainer}>
-        <ListView className={styles.iconPlacement} />
-        <GridView className={styles.iconPlacement} />
+        <ListView
+          className={styles.iconPlacement}
+          isActive={activeView === 'list'}
+          onClick={() => globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'list' })}
+        />
+        <GridView
+          className={styles.iconPlacement}
+          isActive={activeView === 'grid'}
+          onClick={() => globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'grid' })}
+        />
         <Filter />
       </div>
     </div>

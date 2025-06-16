@@ -20,7 +20,9 @@ export type Error = {
 
 const Errors = () => {
   const styles = useStyles();
-  const { errors } = useContext(GlobalContext);
+  const {
+    globalState: { errors }
+  } = useContext(GlobalContext);
 
   return (
     <div className={styles.errors}>

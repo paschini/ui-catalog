@@ -9,6 +9,7 @@ export type IconProps = {
   backgroundFill?: string;
   stroke?: string;
   className?: string;
+  isActive?: boolean;
   onClick?: () => void;
 };
 

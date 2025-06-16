@@ -1,8 +1,5 @@
 import { IconProps, iconStyles } from './IconCommons.tsx';
 import { theme } from '../../WebUnifiTheme.tsx';
-import { useReducer } from 'react';
-import { globalReducer } from '../../globalReducer.tsx';
-import { initialValue } from '../../globalContext.tsx';
 
 const ListView = (props: IconProps) => {
   const styles = iconStyles();
@@ -10,15 +7,14 @@ const ListView = (props: IconProps) => {
     backgroundFill = theme.color.natural,
     width = theme.sizes.icon.small,
     height = theme.sizes.icon.small,
-    className
+    className,
+    isActive,
+    onClick
   } = props;
-
-  const [globalState, globalDispatch] = useReducer(globalReducer, initialValue);
-  const isActive = globalState.activeView === 'list';
 
   return (
     <svg
-      onClick={() => globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'list' })}
+      onClick={onClick}
       className={
         className
           ? `${styles.icon} ${className} ${isActive && styles.active}`

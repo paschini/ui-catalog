@@ -1,13 +1,12 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useContext, useState } from 'react';
 import { createUseStyles } from 'react-jss';
+import { GlobalContext } from '../globalContext.tsx';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
 import { useData } from './useData.tsx';
 import { WebUnifiColors } from '../WebUnifiColors.tsx';
 import DataVersion from './notifications/DataVersion.tsx';
 import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
-import { globalReducer } from '../globalReducer.tsx';
-import { initialValue } from '../globalContext.tsx';
 import DeviceGrid from './DeviceGrid.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
@@ -47,9 +46,10 @@ const Main = () => {
   const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
   const [isShowingNotification, setIsShowingNotification] = useState(false);
 
-  const [{ activeView }] = useReducer(globalReducer, initialValue);
-
-  data && console.log(data.devices);
+  const {
+    globalState: { activeView, errors },
+    globalDispatch
+  } = useContext(GlobalContext);
 
   const getView = () => {
     switch (activeView) {
@@ -63,9 +63,13 @@ const Main = () => {
     }
   };
 
-  useEffect(() => {
-    console.log('changed');
-  }, [activeView]);
+  if (dataError) {
+    globalDispatch({ type: 'SET_ERROR', payload: dataError });
+  }
+
+  if (errors.length > 0) {
+    setIsShowingNotification(true);
+  }
 
   return (
     <div className={styles.main}>
