@@ -24,7 +24,11 @@ const useStyles = createUseStyles({
     gridAutoRows: '28px',
     lineHeight: theme.sizes.lineHeight,
     alignItems: 'center',
-    borderBottom: `1px solid ${theme.color.neutral02}`
+    borderBottom: `1px solid ${theme.color.neutral02}`,
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.color.neutral01
+    }
   }
 });
 

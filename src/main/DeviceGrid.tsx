@@ -36,7 +36,14 @@ const useStyles = createUseStyles({
     boxSizing: 'border-box',
     borderRadius: theme.sizes.borderRadius,
     border: `1px solid ${theme.color.neutral03Light}`,
-    backgroundColor: theme.color.neutral01
+    backgroundColor: theme.color.neutral01,
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: theme.color.neutral02
+    },
+    '&:hover > div': {
+      backgroundColor: theme.color.neutral02
+    }
   },
   tableCellInfo: {
     width: 'calc(100% - 10px)',
@@ -62,12 +69,12 @@ const useStyles = createUseStyles({
     color: theme.color.text3Light
   },
   unifiTag: {
-    position: 'relative'
+    position: 'relative',
+    width: '100%'
   },
   unifiTagText: {
     position: 'absolute',
     top: 0,
-    right: '32px',
     backgroundColor: theme.color.natural,
     color: theme.color.ublue06,
     padding: '5px 10px',

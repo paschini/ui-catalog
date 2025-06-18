@@ -15,7 +15,6 @@ export const useData = (url: string) => {
       try {
         setDataIsLoading(true);
 
-        console.log('before data');
         const { cachedData, metadata } = await cacheService.getData(url);
 
         if (cachedData) {
@@ -27,7 +26,6 @@ export const useData = (url: string) => {
           return;
         }
 
-        console.log('should make it here');
         const response = await fetch(url);
 
         console.log('🔍 Original response headers:', {

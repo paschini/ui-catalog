@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss';
-import { ThemeProps } from '../WebUnifiTheme.tsx';
+import type { ThemeProps } from '../WebUnifiTheme.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   ['.container:hover input ~ .checkmark']: {
