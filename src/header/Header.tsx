@@ -1,6 +1,8 @@
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
 import UDefault from '../assets/icons/UDefault.tsx';
+import { useContext } from 'react';
+import { GlobalContext } from '../globalContext.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   headerContainer: {
@@ -27,15 +29,27 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     alignContent: 'center',
     textAlign: 'right',
     padding: `0 ${theme.sizes.paddings.medium}`
+  },
+  pointer: {
+    cursor: 'pointer'
   }
 }));
 
 const Header = () => {
   const styles = useStyles();
 
+  const { globalDispatch } = useContext(GlobalContext);
+
   return (
-    <div className={styles.headerContainer}>
-      <UDefault />
+    <div
+      className={styles.headerContainer}
+      onClick={() => {
+        globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'list' });
+        globalDispatch({ type: 'SET_CHECKED_FILTER_ITEMS', payload: [] });
+        globalDispatch({ type: 'SET_FILTERED_DEVICE_LIST', payload: [] });
+      }}
+    >
+      <UDefault className={styles.pointer} />
       <span className={styles.breadcrumbs}>Devices</span>
       <span className={styles.author}>Author/Camila Paschini</span>
     </div>

@@ -16,7 +16,8 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     borderRadius: theme.sizes.borderRadius,
     boxShadow: theme.boxShadow,
     lineHeight: theme.sizes.lineHeight,
-    padding: theme.sizes.paddings.medium
+    padding: theme.sizes.paddings.medium,
+    zIndex: 10000
   },
   title: {
     margin: 0,

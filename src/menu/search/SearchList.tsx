@@ -9,7 +9,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     width: '320px',
     maxHeight: '50vh',
     position: 'relative',
-    top: '-20px',
+    top: 0,
     backgroundColor: theme.color.natural,
     justifyContent: 'start',
     alignContent: 'center',
@@ -21,6 +21,17 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     overflowX: 'hidden',
     overflowY: 'scroll',
     boxSizing: 'border-box',
+    scrollbarWidth: 'thin',
+    scrollbarGutter: 'stable',
+    scrollbarColor: `${theme.color.neutral03Light} transparent`,
+    '&': {
+      colorScheme: 'dark', //forces the whiter colors in the scrollbar in Safari
+      scrollbarColor: `${theme.color.neutral03Light} transparent`, // Firefox
+      '&::-webkit-scrollbar': {
+        width: '8px',
+        backgroundColor: 'transparent'
+      }
+    },
     zIndex: 1000
   },
   listItem: {
@@ -42,8 +53,9 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     textTransform: 'capitalize'
   },
   abbrev: {
-    width: '35%',
+    width: '20%',
     textAlign: 'right',
+    paddingRight: theme.sizes.paddings.large,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',

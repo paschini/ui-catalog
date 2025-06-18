@@ -57,7 +57,20 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     color: theme.color.black45,
     outline: 'none',
     fontSize: theme.fontSize,
-    boxShadow: `0 0 25px 10px ${WebUnifiColors.neutral02}`
+    boxShadow: `0 0 25px 10px ${WebUnifiColors.neutral02}`,
+    '&:hover': {
+      backgroundColor: theme.color.neutral02,
+      border: `1px solid ${theme.color.neutral02}`
+    },
+    '&:focus': {
+      backgroundColor: 'transparent',
+      border: `1px solid ${theme.color.ublue06}`
+    },
+    '&:active': {
+      backgroundColor: theme.color.neutral01,
+      border: `1px solid ${theme.color.neutral01}`,
+      color: theme.color.ublue06
+    }
   }
 }));
 

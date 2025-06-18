@@ -19,7 +19,10 @@ const useStyles = createUseStyles({
     overflowX: 'hidden',
     overflowY: 'scroll',
     scrollbarWidth: 'thin',
-    scrollbarGutter: 'stable'
+    scrollbarGutter: 'stable',
+    '&::-webkit-scrollbar-track': {
+      background: 'transparent'
+    }
   },
   tableRow: {
     width: '99%',
