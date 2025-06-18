@@ -12,7 +12,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     display: 'grid',
     overflow: 'hidden',
     gridTemplateColumns: '100vw',
-    gridTemplateRows: '52px 56px calc(100vh - 108px)',
+    gridTemplateRows: '52px 80px calc(100vh - 108px)',
     gridTemplateAreas: `
       "header"
       "menu"

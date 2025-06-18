@@ -1,10 +1,13 @@
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../../WebUnifiTheme.tsx';
+import { useContext } from 'react';
+import { GlobalContext } from '../../globalContext.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   listContainer: {
     display: 'flex',
-    width: '93%',
+    width: '320px',
+    maxHeight: '50vh',
     position: 'relative',
     top: '-20px',
     backgroundColor: theme.color.natural,
@@ -15,36 +18,71 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     boxShadow: theme.boxShadow,
     lineHeight: theme.sizes.lineHeight,
     padding: theme.sizes.paddings.small,
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+    boxSizing: 'border-box',
     zIndex: 1000
   },
   listItem: {
     display: 'flex',
     width: '100%',
     height: '100%',
-    justifyContent: 'space-between'
+    paddingLeft: theme.sizes.paddings.medium,
+    justifyContent: 'space-between',
+    '&:hover': {
+      backgroundColor: theme.color.neutral02,
+      cursor: 'pointer'
+    }
+  },
+  shrinkText: {
+    width: '60%',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    textTransform: 'capitalize'
+  },
+  abbrev: {
+    width: '35%',
+    textAlign: 'right',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    color: theme.color.text3Light
   }
 }));
 
-type Item = {
+export type Item = {
   id: string;
   name: string;
-  category: string;
+  abbrev: string;
+  originalIndex: number;
 };
 
 type SearchListProps = {
-  list: Array<Item>;
+  list?: Array<Item>;
+  setSearchValue: (value: string) => void;
+  setIsShowingList: (value: boolean) => void;
 };
 
 const SearchList = (props: SearchListProps) => {
   const styles = useStyles();
-  const { list } = props;
+  const { list, setSearchValue, setIsShowingList } = props;
+
+  const { globalDispatch } = useContext(GlobalContext);
+
+  const clickItem = (name: string, index: number) => {
+    setSearchValue(name);
+    setIsShowingList(false);
+    globalDispatch({ type: 'SET_ACTIVE_DEVICE', index });
+    globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
+  };
 
   return (
     <div className={styles.listContainer}>
-      {list.map((item) => (
-        <div key={item.id} className={styles.listItem}>
-          <span>{item.name}</span>
-          <span>{item.category}</span>
+      {list?.map((item) => (
+        <div key={item.id} className={styles.listItem} onClick={() => clickItem(item.name, item.originalIndex)}>
+          <span className={styles.shrinkText}>{item.name}</span>
+          <span className={styles.abbrev}>{item.abbrev}</span>
         </div>
       ))}
     </div>

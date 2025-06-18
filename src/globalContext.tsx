@@ -2,10 +2,19 @@ import { createContext } from 'react';
 import type { Dispatch } from 'react';
 import type { Error } from './main/notifications/Errors.tsx';
 import type { GlobalActions } from './globalReducer.tsx';
+import type { DeviceData } from './main/DeviceDataTypes.ts';
 
-export type ActiveView = 'list' | 'grid' | 'details';
+export type View = 'list' | 'grid' | 'details';
 
-export type GlobalStateType = { activeView: ActiveView; errors: Error[] };
+export type GlobalStateType = {
+  activeView: View;
+  previousView: View;
+  deviceList: DeviceData[];
+  filteredDeviceList: DeviceData[];
+  checkedFilterItems: string[];
+  activeDeviceIndex: number;
+  errors: Error[];
+};
 
 export type GlobalContext = {
   globalState: GlobalStateType;
@@ -13,7 +22,15 @@ export type GlobalContext = {
 };
 
 export const initialValue: GlobalContext = {
-  globalState: { activeView: 'list', errors: [] },
+  globalState: {
+    activeView: 'list',
+    previousView: 'list',
+    deviceList: [],
+    filteredDeviceList: [],
+    checkedFilterItems: [],
+    activeDeviceIndex: 0,
+    errors: []
+  },
   globalDispatch: () => null
 };
 

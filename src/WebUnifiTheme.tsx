@@ -1,4 +1,5 @@
-import { ColorProps, WebUnifiColors } from './WebUnifiColors';
+import { WebUnifiColors } from './WebUnifiColors';
+import type { ColorProps } from './WebUnifiColors';
 
 export type WebUnifiSizes = {
   borderRadius: string;

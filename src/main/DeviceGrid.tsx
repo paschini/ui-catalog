@@ -2,8 +2,9 @@ import type { DeviceData } from './DeviceDataTypes.ts';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
 import ImageLoader from './ImageLoader.tsx';
-import { Suspense } from 'react';
+import { Suspense, useContext, useEffect, useState } from 'react';
 import Img from '../assets/icons/Img.tsx';
+import { GlobalContext } from '../globalContext.tsx';
 
 const useStyles = createUseStyles({
   table: {
@@ -84,14 +85,27 @@ const useStyles = createUseStyles({
 });
 
 type DeviceGridProps = {
-  devices: DeviceData[];
   onSelectDevice: (id: string) => void;
 };
 
 const DeviceGrid = (props: DeviceGridProps) => {
   const styles = useStyles();
-  const { devices, onSelectDevice } = props;
+  const { onSelectDevice } = props;
   const iconSize = 84;
+
+  const {
+    globalState: { deviceList, filteredDeviceList }
+  } = useContext(GlobalContext);
+
+  const [devices, setDevices] = useState<DeviceData[]>([]);
+
+  useEffect(() => {
+    if (filteredDeviceList.length > 0) {
+      setDevices(filteredDeviceList);
+    } else {
+      setDevices(deviceList);
+    }
+  }, [deviceList, filteredDeviceList]);
 
   return (
     <div className={styles.table}>

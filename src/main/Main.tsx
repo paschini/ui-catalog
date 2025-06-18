@@ -9,7 +9,6 @@ import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
 import DeviceGrid from './DeviceGrid.tsx';
 import DeviceDetails from './DeviceDetails.tsx';
-import { DeviceData } from './DeviceDataTypes.ts';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -62,7 +61,7 @@ const Main = () => {
       case 'grid':
         return <DeviceGrid devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
       case 'details':
-        return <DeviceDetails device={data?.devices.find((device: DeviceData) => device.id === selectedDeviceId)} />;
+        return <DeviceDetails />;
 
       default:
         return <DeviceList devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
@@ -83,7 +82,14 @@ const Main = () => {
     }
   }, [data, globalDispatch, selectedDeviceId]);
 
-  console.log(data);
+  useEffect(() => {
+    if (data) {
+      globalDispatch({
+        type: 'SET_DEVICE_LIST',
+        payload: data.devices
+      });
+    }
+  }, [data, globalDispatch]);
 
   return (
     <div className={styles.main}>

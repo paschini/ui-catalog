@@ -1,6 +1,6 @@
-import { ChangeEvent, ReactNode } from 'react';
+import type { ChangeEvent, ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
-import { ThemeProps } from '../WebUnifiTheme.tsx';
+import type { ThemeProps } from '../WebUnifiTheme.tsx';
 import Icon from '../assets/icons/Icon.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({

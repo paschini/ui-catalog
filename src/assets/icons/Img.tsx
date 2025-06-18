@@ -1,4 +1,4 @@
-import { IconProps } from './IconCommons.tsx';
+import type { IconProps } from './IconCommons.tsx';
 import { theme } from '../../WebUnifiTheme.tsx';
 
 interface ImgProps extends IconProps {

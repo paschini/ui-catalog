@@ -1,9 +1,9 @@
-import type { DeviceData } from './DeviceDataTypes.ts';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
 import Img from '../assets/icons/Img.tsx';
 import ImageLoader from './ImageLoader.tsx';
-import { Suspense } from 'react';
+import { Suspense, useContext } from 'react';
+import { GlobalContext } from '../globalContext.tsx';
 
 const useStyles = createUseStyles({
   detailsContainer: {
@@ -63,14 +63,15 @@ const useStyles = createUseStyles({
   }
 });
 
-type DeviceDetailsProps = {
-  device: DeviceData;
-};
-
-const DeviceDetails = (props: DeviceDetailsProps) => {
+const DeviceDetails = () => {
   const styles = useStyles();
-  const { device } = props;
   const iconSize = '292';
+
+  const {
+    globalState: { activeDeviceIndex, deviceList }
+  } = useContext(GlobalContext);
+
+  const device = deviceList[activeDeviceIndex];
 
   return (
     <div className={styles.detailsContainer}>

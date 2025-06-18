@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
+import { WebUnifiColors } from '../WebUnifiColors.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   button: {
@@ -45,11 +46,23 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
     '&:disabled': {
       color: theme.color.red3
     }
+  },
+  shadowed: {
+    width: 'max-content',
+    padding: '5px 5px 5px 5px',
+    borderRadius: theme.sizes.borderRadius,
+    boxSizing: 'border-box',
+    border: '1px solid transparent',
+    backgroundColor: theme.color.natural,
+    color: theme.color.black45,
+    outline: 'none',
+    fontSize: theme.fontSize,
+    boxShadow: `0 0 25px 10px ${WebUnifiColors.neutral02}`
   }
 }));
 
 type ButtonProps = {
-  type?: string;
+  type?: 'danger' | 'shadowed' | 'button';
   isActive?: boolean;
   disabled?: boolean;
   children: ReactNode;
@@ -63,7 +76,13 @@ const Button = (props: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={type === 'danger' ? styles.danger : isActive ? `${styles.button} ${styles.active}` : styles.button}
+      className={
+        (type?.length || 0) > 0
+          ? styles[type || 'button']
+          : isActive
+            ? `${styles.button} ${styles.active}`
+            : styles.button
+      }
       disabled={disabled}
     >
       {children}
