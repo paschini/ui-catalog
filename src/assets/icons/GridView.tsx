@@ -1,4 +1,5 @@
-import { IconProps, iconStyles } from './IconCommons.tsx';
+import { iconStyles } from './IconCommons.tsx';
+import type { IconProps } from './IconCommons.tsx';
 
 const GridView = (props: IconProps) => {
   const styles = iconStyles();

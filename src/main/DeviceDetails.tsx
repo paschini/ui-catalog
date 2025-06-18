@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
 import Img from '../assets/icons/Img.tsx';
-import ImageLoader from './ImageLoader.tsx';
+import ImageLoader from '../components/ImageLoader.tsx';
 import { Suspense, useContext } from 'react';
 import { GlobalContext } from '../globalContext.tsx';
 

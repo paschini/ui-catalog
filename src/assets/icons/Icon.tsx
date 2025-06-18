@@ -1,4 +1,4 @@
-import { IconProps } from './IconCommons.tsx';
+import type { IconProps } from './IconCommons.tsx';
 import UDefault from './UDefault.tsx';
 import GridView from './GridView.tsx';
 import ListView from './ListView.tsx';

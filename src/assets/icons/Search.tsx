@@ -1,19 +1,14 @@
-import { IconProps } from './IconCommons.tsx';
+import type { IconProps } from './IconCommons.tsx';
 import { theme } from '../../WebUnifiTheme.tsx';
 
 const Search = (props: IconProps) => {
-  const {
-    fill = theme.color.neutral08,
-    height = theme.sizes.icon.small.height,
-    width = theme.sizes.icon.small.width,
-    className
-  } = props;
+  const { fill = theme.color.neutral08, className } = props;
 
   return (
     <svg
-      width={`${width}`}
-      height={`${height}`}
-      viewBox={`0 0 ${width} ${height}`}
+      width={20}
+      height={20}
+      viewBox={'0 0 20 20'}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}

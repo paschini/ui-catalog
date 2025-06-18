@@ -57,14 +57,14 @@ const Main = () => {
   const getView = () => {
     switch (activeView) {
       case 'list':
-        return <DeviceList devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceList onSelectDevice={setSelectedDeviceId} />;
       case 'grid':
-        return <DeviceGrid devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceGrid onSelectDevice={setSelectedDeviceId} />;
       case 'details':
         return <DeviceDetails />;
 
       default:
-        return <DeviceList devices={data?.devices} onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceList onSelectDevice={setSelectedDeviceId} />;
     }
   };
 
