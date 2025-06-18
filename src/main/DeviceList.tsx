@@ -5,6 +5,7 @@ import type { DeviceData } from './DeviceDataTypes.ts';
 import ImageLoader from '../components/ImageLoader.tsx';
 import Img from '../assets/icons/Img.tsx';
 import { GlobalContext } from '../globalContext.tsx';
+import { prefetchImage } from './utils.tsx';
 
 const useStyles = createUseStyles({
   table: {
@@ -74,7 +75,12 @@ const DeviceList = (props: DeviceListProps) => {
 
       <div className={styles.tableContent}>
         {devices.map((device, index) => (
-          <div className={styles.tableRow} key={`device-${device.id}`} onClick={() => selectDevice(device.id, index)}>
+          <div
+            className={styles.tableRow}
+            key={`device-${device.id}`}
+            onClick={() => selectDevice(device.id, index)}
+            onMouseEnter={() => prefetchImage(device)}
+          >
             <Suspense fallback={<Img width={'33'} height={'19'} />}>
               <ImageLoader
                 src={`https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${iconSize}&q=75`}

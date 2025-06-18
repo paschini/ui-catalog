@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useContext, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GlobalContext } from '../globalContext.tsx';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
@@ -8,7 +8,7 @@ import DataVersion from './notifications/DataVersion.tsx';
 import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
 import DeviceGrid from './DeviceGrid.tsx';
-import DeviceDetails from './DeviceDetails.tsx';
+import Img from '../assets/icons/Img.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -42,12 +42,21 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 }));
 
 const Main = () => {
+  const DeviceDetails = lazy(() => import('./DeviceDetails.tsx'));
+
   const styles = useStyles();
   const endpoint = 'https://static.ui.com/fingerprint/ui/public.json';
   const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
   const [isShowingNotification, setIsShowingNotification] = useState(false);
 
-  const [selectedDeviceId, setSelectedDeviceId] = useState<string | null>(null);
+  const [_, setSelectedDeviceId] = useState<string | null>(null);
+
+  const selectDeviceId = useCallback((id: string) => {
+    requestAnimationFrame(() => {
+      setSelectedDeviceId(id);
+      globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
+    });
+  }, []);
 
   const {
     globalState: { activeView, errors },
@@ -57,14 +66,18 @@ const Main = () => {
   const getView = () => {
     switch (activeView) {
       case 'list':
-        return <DeviceList onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceList onSelectDevice={selectDeviceId} />;
       case 'grid':
-        return <DeviceGrid onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceGrid onSelectDevice={selectDeviceId} />;
       case 'details':
-        return <DeviceDetails />;
+        return (
+          <Suspense fallback={<Img />}>
+            <DeviceDetails />
+          </Suspense>
+        );
 
       default:
-        return <DeviceList onSelectDevice={setSelectedDeviceId} />;
+        return <DeviceList onSelectDevice={selectDeviceId} />;
     }
   };
 
@@ -75,12 +88,6 @@ const Main = () => {
   if (errors.length > 0) {
     setIsShowingNotification(true);
   }
-
-  useEffect(() => {
-    if (data && selectedDeviceId) {
-      globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
-    }
-  }, [data, globalDispatch, selectedDeviceId]);
 
   useEffect(() => {
     if (data) {

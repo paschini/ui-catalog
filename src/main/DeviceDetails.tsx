@@ -2,7 +2,7 @@ import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme.tsx';
 import Img from '../assets/icons/Img.tsx';
 import ImageLoader from '../components/ImageLoader.tsx';
-import { Suspense, useContext } from 'react';
+import { Suspense, useContext, useMemo } from 'react';
 import { GlobalContext } from '../globalContext.tsx';
 
 const useStyles = createUseStyles({
@@ -71,16 +71,17 @@ const DeviceDetails = () => {
     globalState: { activeDeviceIndex, deviceList }
   } = useContext(GlobalContext);
 
-  const device = deviceList[activeDeviceIndex];
+  const device = useMemo(() => deviceList[activeDeviceIndex], [deviceList, activeDeviceIndex]);
+  const imageUrl = useMemo(
+    () =>
+      `https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${iconSize}&q=75`,
+    [device.id, device.images.default, iconSize]
+  );
 
   return (
     <div className={styles.detailsContainer}>
       <Suspense fallback={<Img width={iconSize} />}>
-        <ImageLoader
-          src={`https://images.svc.ui.com/?u=https%3A%2F%2Fstatic.ui.com%2Ffingerprint%2Fui%2Fimages%2F${device.id}%2Fdefault%2F${device.images.default}.png&w=${iconSize}&q=75`}
-          alt={`icon for ${device.product.name} ${device.line.name}`}
-          width={iconSize}
-        />
+        <ImageLoader src={imageUrl} alt={`icon for ${device.product.name} ${device.line.name}`} width={iconSize} />
       </Suspense>
       <div className={styles.infoContainer}>
         <div className={`${styles.text} ${styles.title}`}>{device.product.name}</div>

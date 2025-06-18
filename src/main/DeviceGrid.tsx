@@ -5,6 +5,7 @@ import ImageLoader from '../components/ImageLoader.tsx';
 import { Suspense, useContext, useEffect, useState } from 'react';
 import Img from '../assets/icons/Img.tsx';
 import { GlobalContext } from '../globalContext.tsx';
+import { prefetchImage } from './utils.tsx';
 
 const useStyles = createUseStyles({
   table: {
@@ -112,7 +113,12 @@ const DeviceGrid = (props: DeviceGridProps) => {
       <div className={styles.tableContent}>
         <div className={styles.tableRow}>
           {devices.map((device) => (
-            <div key={`device-${device.id}`} className={styles.tableCell} onClick={() => onSelectDevice(device.id)}>
+            <div
+              key={`device-${device.id}`}
+              className={styles.tableCell}
+              onClick={() => onSelectDevice(device.id)}
+              onMouseEnter={() => prefetchImage(device)}
+            >
               {device.line.name === 'UniFi' && (
                 <div className={styles.unifiTag}>
                   <div className={styles.unifiTagText}>UniFi</div>
