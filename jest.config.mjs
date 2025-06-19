@@ -1,5 +1,5 @@
 const config = {
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.tsx?$': 'ts-jest'
   },
@@ -9,7 +9,7 @@ const config = {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.{js,ts}'],
+  collectCoverageFrom: ['src/**/*.{js,ts,tsx}'],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageThreshold: {

@@ -21,7 +21,7 @@
 
 ## Web broswer support:
 - Chrome (supported)
-- Safari (supported, has some differences in scrollbar appearaance)
+- Safari (supported, has some differences in scrollbar appearance)
 - Firefox (supported, untested)
 - Edge (unsupported, has restrictions)
 

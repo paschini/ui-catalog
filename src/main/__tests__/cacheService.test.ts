@@ -1,4 +1,3 @@
-import { describe, expect, test, jest, beforeEach, afterEach } from '@jest/globals';
 import { CacheService } from '../cacheService';
 
 type MockCache = {

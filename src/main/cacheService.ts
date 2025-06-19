@@ -7,7 +7,6 @@ export class CacheService {
 
   private getMaxAge(headers: Headers): number {
     const cacheControl = headers.get('cache-control');
-    console.log('cacheControl ? ', cacheControl);
     if (!cacheControl) return 0;
 
     const maxAgeMatch = cacheControl.match(/max-age=(\d+)/);
@@ -17,7 +16,6 @@ export class CacheService {
   getData = async (url: string) => {
     console.log('🔍 Fetching data from cache');
     try {
-      console.log('in the try');
       const cache = await caches.open(this.cacheName);
       const cachedResponse = await cache.match(url);
 
@@ -40,7 +38,6 @@ export class CacheService {
   };
 
   async cacheData(url: string, data: any, originalHeaders: Headers) {
-    console.log('do i get here?');
     try {
       const cache = await caches.open(this.cacheName);
       const headers = new Headers({
