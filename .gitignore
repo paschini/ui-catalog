@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Test reports
+coverage
+
+# Unnecessary assets
+assets/icons/*.svg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
