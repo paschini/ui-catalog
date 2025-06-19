@@ -16,7 +16,9 @@ dist-ssr
 coverage
 
 # Unnecessary assets
-assets/icons/*.svg
+**/icons/*.svg
+*.png
+*.pdf
 
 # Editor directories and files
 .vscode/*
