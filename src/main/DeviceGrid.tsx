@@ -89,7 +89,7 @@ const useStyles = createUseStyles({
 });
 
 type DeviceGridProps = {
-  onSelectDevice: (id: string) => void;
+  onSelectDevice: (index: number) => void;
 };
 
 const DeviceGrid = (props: DeviceGridProps) => {
@@ -119,7 +119,7 @@ const DeviceGrid = (props: DeviceGridProps) => {
             <div
               key={`device-${device.id}`}
               className={styles.tableCell}
-              onClick={() => onSelectDevice(device.id)}
+              onClick={() => onSelectDevice(deviceList.indexOf(device))}
               onMouseEnter={() => prefetchImage(device)}
             >
               {device.line.name === 'UniFi' && (

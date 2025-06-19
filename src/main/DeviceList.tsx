@@ -35,7 +35,7 @@ const useStyles = createUseStyles({
 });
 
 type DeviceListProps = {
-  onSelectDevice: (id: string) => void;
+  onSelectDevice: (index: number) => void;
 };
 
 const DeviceList = (props: DeviceListProps) => {
@@ -44,16 +44,10 @@ const DeviceList = (props: DeviceListProps) => {
   const iconSize = 20;
 
   const {
-    globalState: { deviceList, filteredDeviceList },
-    globalDispatch
+    globalState: { deviceList, filteredDeviceList }
   } = useContext(GlobalContext);
 
   const [devices, setDevices] = useState<DeviceData[]>([]);
-
-  const selectDevice = (id: string, index: number) => {
-    onSelectDevice(id);
-    globalDispatch({ type: 'SET_ACTIVE_DEVICE', index: index });
-  };
 
   useEffect(() => {
     if (filteredDeviceList.length > 0) {
@@ -74,11 +68,11 @@ const DeviceList = (props: DeviceListProps) => {
       </div>
 
       <div className={styles.tableContent}>
-        {devices.map((device, index) => (
+        {devices.map((device) => (
           <div
             className={styles.tableRow}
             key={`device-${device.id}`}
-            onClick={() => selectDevice(device.id, index)}
+            onClick={() => onSelectDevice(deviceList.indexOf(device))}
             onMouseEnter={() => prefetchImage(device)}
           >
             <Suspense fallback={<Img width={'33'} height={'19'} />}>

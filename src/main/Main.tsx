@@ -8,7 +8,6 @@ import DataVersion from './notifications/DataVersion.tsx';
 import Errors from './notifications/Errors.tsx';
 import DeviceList from './DeviceList.tsx';
 import DeviceGrid from './DeviceGrid.tsx';
-import Img from '../assets/icons/Img.tsx';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -49,19 +48,20 @@ const Main = () => {
   const { data, dataIsLoading, dataError, metadata } = useData(endpoint);
   const [isShowingNotification, setIsShowingNotification] = useState(false);
 
-  const [_, setSelectedDeviceId] = useState<string | null>(null);
-
-  const selectDeviceId = useCallback((id: string) => {
-    requestAnimationFrame(() => {
-      setSelectedDeviceId(id);
-      globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
-    });
-  }, []);
-
   const {
     globalState: { activeView, errors },
     globalDispatch
   } = useContext(GlobalContext);
+
+  const selectDeviceId = useCallback(
+    (index: number) => {
+      requestAnimationFrame(() => {
+        globalDispatch({ type: 'SET_ACTIVE_DEVICE', index: index });
+        globalDispatch({ type: 'SET_ACTIVE_VIEW', payload: 'details' });
+      });
+    },
+    [globalDispatch]
+  );
 
   const getView = () => {
     switch (activeView) {
@@ -71,7 +71,7 @@ const Main = () => {
         return <DeviceGrid onSelectDevice={selectDeviceId} />;
       case 'details':
         return (
-          <Suspense fallback={<Img />}>
+          <Suspense>
             <DeviceDetails />
           </Suspense>
         );

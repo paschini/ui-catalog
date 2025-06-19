@@ -33,12 +33,14 @@ const SearchInput = () => {
           device.product.abbrev.toLowerCase().includes(searchValue)
       )
       .sort((a, b) => a.product.name.localeCompare(b.product.name))
-      .map((device) => ({
-        id: device.id,
-        name: device.product.name,
-        abbrev: device.product.abbrev,
-        originalIndex: deviceList.indexOf(device)
-      }));
+      .map((device) => {
+        return {
+          id: device.id,
+          name: device.product.name,
+          abbrev: device.product.abbrev,
+          originalIndex: deviceList.indexOf(device)
+        };
+      });
 
     setItemsList(list);
   }, [deviceList, searchValue, filteredDeviceList]);
