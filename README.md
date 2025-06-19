@@ -30,7 +30,7 @@
 ![List View page](/src/assets/listview.png)
 
 #### Rendered grid view:
-![Grid View page](/src/assets/gridview.png)
+![Grid View page](/src/assets/gridView.png)
 
 ## Features:
 - The search input accepts text and will find devices based on a product name or abbreviation.
