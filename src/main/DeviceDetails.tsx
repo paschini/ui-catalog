@@ -1,9 +1,9 @@
-import { createUseStyles } from 'react-jss';
-import { theme } from '../WebUnifiTheme.tsx';
-import Img from '../assets/icons/Img.tsx';
-import ImageLoader from '../components/ImageLoader.tsx';
 import { Suspense, useContext, useMemo } from 'react';
-import { GlobalContext } from '../globalContext.tsx';
+import { createUseStyles } from 'react-jss';
+import { theme } from '../WebUnifiTheme';
+import Img from '../assets/icons/Img';
+import ImageLoader from '../components/ImageLoader';
+import { GlobalContext } from '../globalContext';
 
 const useStyles = createUseStyles({
   detailsContainer: {

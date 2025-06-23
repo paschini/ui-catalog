@@ -1,8 +1,8 @@
 import { createUseStyles } from 'react-jss';
-import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import UDefault from '../assets/icons/UDefault.tsx';
+import type { ThemeProps } from '../WebUnifiTheme';
+import UDefault from '../assets/icons/UDefault';
 import { useContext } from 'react';
-import { GlobalContext } from '../globalContext.tsx';
+import { GlobalContext } from '../globalContext';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   headerContainer: {

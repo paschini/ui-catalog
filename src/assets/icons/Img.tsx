@@ -1,5 +1,5 @@
-import type { IconProps } from './IconCommons.tsx';
-import { theme } from '../../WebUnifiTheme.tsx';
+import type { IconProps } from './IconCommons';
+import { theme } from '../../WebUnifiTheme';
 
 interface ImgProps extends IconProps {
   width?: string;

@@ -1,6 +1,6 @@
-import { iconStyles } from './IconCommons.tsx';
-import type { IconProps } from './IconCommons.tsx';
-import { theme } from '../../WebUnifiTheme.tsx';
+import { iconStyles } from './IconCommons';
+import type { IconProps } from './IconCommons';
+import { theme } from '../../WebUnifiTheme';
 
 const ListView = (props: IconProps) => {
   const styles = iconStyles();

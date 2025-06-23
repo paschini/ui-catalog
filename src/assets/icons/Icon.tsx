@@ -1,8 +1,8 @@
 import type { IconProps } from './IconCommons.tsx';
-import UDefault from './UDefault.tsx';
-import GridView from './GridView.tsx';
-import ListView from './ListView.tsx';
-import Search from './Search.tsx';
+import UDefault from './UDefault';
+import GridView from './GridView';
+import ListView from './ListView';
+import Search from './Search';
 
 const Icon = (props: IconProps) => {
   switch (props.name) {

@@ -1,11 +1,11 @@
+import { Suspense, useContext, useEffect, useState } from 'react';
 import type { DeviceData } from './DeviceDataTypes.ts';
 import { createUseStyles } from 'react-jss';
-import { theme } from '../WebUnifiTheme.tsx';
-import ImageLoader from '../components/ImageLoader.tsx';
-import { Suspense, useContext, useEffect, useState } from 'react';
-import Img from '../assets/icons/Img.tsx';
-import { GlobalContext } from '../globalContext.tsx';
-import { prefetchImage } from './utils.tsx';
+import { theme } from '../WebUnifiTheme';
+import ImageLoader from '../components/ImageLoader';
+import Img from '../assets/icons/Img';
+import { GlobalContext } from '../globalContext';
+import { prefetchImage } from './utils';
 
 const useStyles = createUseStyles({
   table: {

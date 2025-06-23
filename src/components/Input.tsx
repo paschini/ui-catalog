@@ -1,7 +1,7 @@
 import type { ChangeEvent, ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import Icon from '../assets/icons/Icon.tsx';
+import Icon from '../assets/icons/Icon';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   input: {

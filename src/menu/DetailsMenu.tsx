@@ -1,10 +1,10 @@
-import { createUseStyles } from 'react-jss';
-import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import Button from '../components/Button.tsx';
-import ArrowLeftPrimary from '../assets/icons/ArrowLeftPrimary.tsx';
-import ArrowRightPrimary from '../assets/icons/ArrowRightPrimary.tsx';
 import { useContext } from 'react';
-import { GlobalContext } from '../globalContext.tsx';
+import { createUseStyles } from 'react-jss';
+import type { ThemeProps } from '../WebUnifiTheme';
+import Button from '../components/Button';
+import ArrowLeftPrimary from '../assets/icons/ArrowLeftPrimary';
+import ArrowRightPrimary from '../assets/icons/ArrowRightPrimary';
+import { GlobalContext } from '../globalContext';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   menuContainer: {

@@ -1,7 +1,7 @@
-import { createUseStyles } from 'react-jss';
-import { ThemeProps } from '../../WebUnifiTheme.tsx';
 import { useContext } from 'react';
-import { GlobalContext } from '../../globalContext.tsx';
+import { createUseStyles } from 'react-jss';
+import type { ThemeProps } from '../../WebUnifiTheme';
+import { GlobalContext } from '../../globalContext';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   errors: {

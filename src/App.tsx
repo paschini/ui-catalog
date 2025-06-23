@@ -1,11 +1,11 @@
 import { createUseStyles } from 'react-jss';
 import type { ThemeProps } from './WebUnifiTheme.tsx';
-import Header from './header/Header.tsx';
-import Menu from './menu/Menu.tsx';
-import Main from './main/Main.tsx';
-import { GlobalContext, initialValue } from './globalContext.tsx';
+import Header from './header/Header';
+import Menu from './menu/Menu';
+import Main from './main/Main';
+import { GlobalContext, initialValue } from './globalContext';
 import { useReducer } from 'react';
-import { globalReducer } from './globalReducer.tsx';
+import { globalReducer } from './globalReducer';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   layout: {

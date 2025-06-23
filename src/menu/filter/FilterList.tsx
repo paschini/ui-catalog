@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react';
-import Button from '../../components/Button.tsx';
-import CheckBox from '../../components/CheckBox.tsx';
+import Button from '../../components/Button';
+import CheckBox from '../../components/CheckBox';
 import { createUseStyles } from 'react-jss';
-import type { ThemeProps } from '../../WebUnifiTheme.tsx';
-import { GlobalContext } from '../../globalContext.tsx';
+import type { ThemeProps } from '../../WebUnifiTheme';
+import { GlobalContext } from '../../globalContext';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   listContainer: {

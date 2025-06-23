@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import type { ChangeEvent } from 'react';
-import SearchList from './SearchList.tsx';
-import type { Item } from './SearchList.tsx';
-import Input from '../../components/Input.tsx';
-import { useClickOutside } from '../../components/useClickOutside.ts';
-import { GlobalContext } from '../../globalContext.tsx';
+import SearchList from './SearchList';
+import type { Item } from './SearchList';
+import Input from '../../components/Input';
+import { useClickOutside } from '../../components/useClickOutside';
+import { GlobalContext } from '../../globalContext';
 
 const SearchInput = () => {
   const [searchValue, setSearchValue] = useState('');

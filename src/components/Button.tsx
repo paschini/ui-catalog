@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { createUseStyles } from 'react-jss';
-import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import { WebUnifiColors } from '../WebUnifiColors.tsx';
+import type { ThemeProps } from '../WebUnifiTheme';
+import { WebUnifiColors } from '../WebUnifiColors';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   button: {

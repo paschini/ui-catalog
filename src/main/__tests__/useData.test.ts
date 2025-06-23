@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { useData } from '../useData.tsx';
+import { useData } from '../useData';
 
 jest.mock('../cacheService', () => {
   const mockGetData = jest.fn();

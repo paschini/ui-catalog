@@ -1,13 +1,13 @@
 import { lazy, Suspense, useCallback, useContext, useEffect, useState } from 'react';
 import { createUseStyles } from 'react-jss';
-import { GlobalContext } from '../globalContext.tsx';
-import type { ThemeProps } from '../WebUnifiTheme.tsx';
-import { useData } from './useData.tsx';
-import { WebUnifiColors } from '../WebUnifiColors.tsx';
-import DataVersion from './notifications/DataVersion.tsx';
-import Errors from './notifications/Errors.tsx';
-import DeviceList from './DeviceList.tsx';
-import DeviceGrid from './DeviceGrid.tsx';
+import { GlobalContext } from '../globalContext';
+import type { ThemeProps } from '../WebUnifiTheme';
+import { useData } from './useData';
+import { WebUnifiColors } from '../WebUnifiColors';
+import DataVersion from './notifications/DataVersion';
+import Errors from './notifications/Errors';
+import DeviceList from './DeviceList';
+import DeviceGrid from './DeviceGrid';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   main: {
@@ -41,7 +41,7 @@ const useStyles = createUseStyles((theme: ThemeProps) => ({
 }));
 
 const Main = () => {
-  const DeviceDetails = lazy(() => import('./DeviceDetails.tsx'));
+  const DeviceDetails = lazy(() => import('./DeviceDetails'));
 
   const styles = useStyles();
   const endpoint = 'https://static.ui.com/fingerprint/ui/public.json';

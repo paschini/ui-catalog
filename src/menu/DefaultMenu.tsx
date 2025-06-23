@@ -1,12 +1,12 @@
-import SearchInput from './search/SearchInput.tsx';
-import Count from '../components/Count.tsx';
-import ListView from '../assets/icons/ListView.tsx';
-import GridView from '../assets/icons/GridView.tsx';
-import Filter from './filter/Filter.tsx';
+import SearchInput from './search/SearchInput';
+import Count from '../components/Count';
+import ListView from '../assets/icons/ListView';
+import GridView from '../assets/icons/GridView';
+import Filter from './filter/Filter';
 import { createUseStyles } from 'react-jss';
-import type { ThemeProps } from '../WebUnifiTheme.tsx';
+import type { ThemeProps } from '../WebUnifiTheme';
 import { useContext } from 'react';
-import { GlobalContext } from '../globalContext.tsx';
+import { GlobalContext } from '../globalContext';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({
   menuContainer: {

@@ -1,5 +1,5 @@
-import type { IconProps } from './IconCommons.tsx';
-import { type ThemeProps } from '../../WebUnifiTheme.tsx';
+import type { IconProps } from './IconCommons';
+import { type ThemeProps } from '../../WebUnifiTheme';
 import { createUseStyles } from 'react-jss';
 
 const useStyles = createUseStyles((theme: ThemeProps) => ({

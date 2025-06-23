@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { GlobalContext } from '../globalContext.tsx';
-import DefaultMenu from './DefaultMenu.tsx';
-import DetailsMenu from './DetailsMenu.tsx';
+import { GlobalContext } from '../globalContext';
+import DefaultMenu from './DefaultMenu';
+import DetailsMenu from './DetailsMenu';
 
 const Menu = () => {
   const {

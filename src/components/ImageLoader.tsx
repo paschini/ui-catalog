@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Img from '../assets/icons/Img.tsx';
+import Img from '../assets/icons/Img';
 
 type ImageLoaderProps = {
   src: string;

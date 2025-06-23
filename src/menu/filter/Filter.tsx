@@ -1,7 +1,7 @@
-import Button from '../../components/Button.tsx';
 import { useRef, useState } from 'react';
-import FilterList from './FilterList.tsx';
-import { useClickOutside } from '../../components/useClickOutside.ts';
+import Button from '../../components/Button';
+import FilterList from './FilterList';
+import { useClickOutside } from '../../components/useClickOutside';
 
 const Filter = () => {
   const [isShowingList, setIsShowingList] = useState(false);
