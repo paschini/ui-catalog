@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Img from '../assets/icons/Img';
+import { GlobalContext } from '../globalContext';
 
 type ImageLoaderProps = {
   src: string;
@@ -11,6 +12,8 @@ type ImageLoaderProps = {
 const ImageLoader = ({ src, alt, className, width }: ImageLoaderProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const { globalDispatch } = useContext(GlobalContext);
 
   useEffect(() => {
     const img = new Image();
@@ -27,6 +30,7 @@ const ImageLoader = ({ src, alt, className, width }: ImageLoaderProps) => {
 
   if (error) {
     console.error('Image loading error:', error);
+    globalDispatch({ type: 'SET_ERROR', payload: { code: 13, message: error } });
     return <Img width={width} />;
   }
 

@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import type { Dispatch } from 'react';
-import type { Error } from './main/notifications/Errors.tsx';
-import type { GlobalActions } from './globalReducer.tsx';
-import type { DeviceData } from './main/DeviceDataTypes.ts';
+import type { Error } from './main/notifications/Errors';
+import type { GlobalActions } from './globalReducer';
+import type { DeviceData } from './main/DeviceDataTypes';
 
 export type View = 'list' | 'grid' | 'details';
 

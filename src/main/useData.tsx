@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CacheService } from './cacheService';
+import type { Error } from './notifications/Errors';
 
 const cacheService = new CacheService('ui-data-cache');
 
@@ -40,7 +41,7 @@ export const useData = (url: string) => {
         setData(newData);
         setMetadata(newMetadata);
       } catch (error) {
-        setDataError(error instanceof Error ? error : new Error('Something went wrong while fetching data.'));
+        setDataError({ code: 11, message: `Something went wrong while fetching data: ${error}` });
       } finally {
         setDataIsLoading(false);
       }

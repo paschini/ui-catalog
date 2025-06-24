@@ -81,14 +81,6 @@ const Main = () => {
     }
   };
 
-  if (dataError) {
-    globalDispatch({ type: 'SET_ERROR', payload: dataError });
-  }
-
-  if (errors.length > 0) {
-    setIsShowingNotification(true);
-  }
-
   useEffect(() => {
     if (data) {
       globalDispatch({
@@ -97,6 +89,16 @@ const Main = () => {
       });
     }
   }, [data, globalDispatch]);
+
+  useEffect(() => {
+    if (dataError) {
+      globalDispatch({ type: 'SET_ERROR', payload: dataError });
+    }
+
+    if (errors.length > 0) {
+      setIsShowingNotification(true);
+    }
+  }, [dataError, errors.length, globalDispatch]);
 
   return (
     <div className={styles.main}>
