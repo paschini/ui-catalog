@@ -1,4 +1,4 @@
-import { Suspense, useContext, useEffect, useState } from 'react';
+import { Suspense, useContext, useEffect, useState, startTransition } from 'react';
 import { createUseStyles } from 'react-jss';
 import { theme } from '../WebUnifiTheme';
 import type { DeviceData } from './DeviceDataTypes.ts';
@@ -50,11 +50,13 @@ const DeviceList = (props: DeviceListProps) => {
   const [devices, setDevices] = useState<DeviceData[]>([]);
 
   useEffect(() => {
-    if (filteredDeviceList.length > 0) {
-      setDevices(filteredDeviceList);
-    } else {
-      setDevices(deviceList);
-    }
+    startTransition(() => {
+      if (filteredDeviceList.length > 0) {
+        setDevices(filteredDeviceList);
+      } else {
+        setDevices(deviceList);
+      }
+    });
   }, [deviceList, filteredDeviceList]);
 
   return (
